@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
+import 'package:common_utils/common_utils.dart';
+
+import 'StatefulClass.dart';
+import 'HelloWorldTests.dart';
+import 'LayoutTests.dart';
+import 'GestureTests.dart';
+import 'IncreaseTests.dart';
+
 
 void main() => runApp(new MyApp());
 
@@ -7,9 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final wordPair = new WordPair.random();
+    LogUtil.init(isDebug: true);
     return new MaterialApp (
       title: 'Welcome to Flutter',
-      home: new RandomWords(),
+      theme: new ThemeData(
+        primaryColor: Colors.white,
+      ),
+      home: new ListDemo(),
       // home: new Scaffold(
       //   appBar: new AppBar(
       //     title: new Text('Welcome to Flutter'),    
@@ -23,100 +34,67 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class RandomWordsState extends State<RandomWords> {
-
-  final _suggestions = <WordPair>[];
-  final _biggerFont = const TextStyle(fontSize: 19.0);
-
-  final _saved = new Set<WordPair>();
-  Widget _buildSuggestions() {
-    return new ListView.builder(
-      padding: const EdgeInsets.all(17.0),
-      itemBuilder: (context, i) {
-        if (i.isOdd) return new Divider();
-        final index = i ~/ 2;
-        if (index >= _suggestions.length) {
-          _suggestions.addAll(generateWordPairs().take(10));
-        }
-        return _buildRow(_suggestions[index]);
-      }
-    );
-  }
-
-  Widget _buildRow(WordPair pair) {
-    final alreadySaved = _saved.contains(pair);
-    return new ListTile(
-      title: new Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-        ),
-      trailing: new Icon(
-        alreadySaved ? Icons.favorite : Icons.favorite_border,
-        color: alreadySaved ? Colors.red : null,
-      ),
-      onTap: () {
-        setState(() {
-          if (alreadySaved) {
-            _saved.remove(pair);
-          } else {
-            _saved.add(pair);
-          }
-        });
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // final wordPair = new WordPair.random();
-    // return new Text(wordPair.asPascalCase);
-    return new Scaffold(
+class ListDemo extends StatelessWidget {
+  final _titles = <String>[
+    'favorite', 'layout', 'gesture', 'increment','others'
+  ];
+  Widget build(BuildContext context){
+        return new Scaffold(
       appBar: new AppBar(
         title: new Text('Startup Name Generator'),
         actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved),
+          // new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved),
+          // new IconButton(icon: new Icon(Icons.book), onPressed: _pushSaved),
         ],
       ),
-      body: _buildSuggestions(),
-    );
-  }
-
-  void _pushSaved() {
-    Navigator.of(context).push(
-      new MaterialPageRoute(
-        builder: (context) {
-          final tiles = _saved.map(
-            (pair) {
-              return new ListTile(
-                title: new Text(
-                  pair.asPascalCase,
-                  style: _biggerFont,
-                ),
-              );
+      body: new ListView.builder(
+        padding: const EdgeInsets.all(20),
+        itemCount: _titles.length,
+        itemBuilder: (context, i) {
+          // if (i >= _titles.length) {
+          //   return null;
+          // }
+          return new ListTile(
+            title: new Text(_titles[i]),
+            onTap:(){
+              _push(context,_titles[i]);
             },
-          );
-          final divided = ListTile
-          .divideTiles(
-            context: context,
-            tiles: tiles,
-          )
-          .toList();
-
-          return new Scaffold(
-            appBar: new AppBar(
-              title: new Text('Saved Suggestions'),
-            ),
-            body: new ListView(children: divided),
           );
         },
       ),
     );
   }
 
-}
+  // Widget _buildRow(String title) {
+  //   return new ListTile(
+  //     title: new Text(title),
+  //     onTap:(){
+  //       _push(title);
+  //     },
+  //   );
+  // }
 
+  void _push(BuildContext context, String title) {
+    // navigatorKey.currentState..push(
+    Navigator.of(context).push(
+      new MaterialPageRoute(
+        builder: (context){
+          switch (title) {
+            case 'favorite': return RandomWords();
+            case 'layout': return LayoutTests();
+            case 'gesture': return MyButton();
+            case 'increment': return Counter();
+            default: return HelloWorld();
+          }
+          // if (title == 'favorite') {
+          //   return RandomWords();  
+          // } else if (title == 'layout') {
+          //   return LayoutTests();
+          // } 
+          // return HelloWorld();
+        }
+      ),
+    );
+  }
+} 
 
-class RandomWords extends StatefulWidget {
-  @override
-  createState() => new RandomWordsState();
-}
