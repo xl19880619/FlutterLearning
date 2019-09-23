@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
 
 class ListDemo extends StatelessWidget {
   final _titles = <String>[
-    'favorite', 'layout', 'gesture', 'increment','others'
+    'favorite', 'layout', 'gesture', 'increment','otherssss'
   ];
   Widget build(BuildContext context){
         return new Scaffold(
