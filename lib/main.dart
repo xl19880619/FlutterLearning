@@ -7,12 +7,13 @@ import 'LayoutTests.dart';
 import 'GestureTests.dart';
 import 'IncreaseTests.dart';
 import 'EventTests.dart';
+import 'NetworkTests.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui';
 
-void main() => runApp(new MyApp());
+// void main() => runApp(new MyApp());
 
-// void main() => runApp(_widgetForRoute(window.defaultRouteName));
+void main() => runApp(_widgetForRoute(window.defaultRouteName));
 
 Widget _widgetForRoute(String route) {
   switch (route) {
@@ -21,10 +22,10 @@ Widget _widgetForRoute(String route) {
     case 'home':
       return RandomWords();
     default:
-      return MyApp();
-    // return Center(
-    //   child: Text('Unknown route: $route', textDirection: TextDirection.ltr),
-    // );
+      // return MyApp();
+    return Center(
+      child: Text('Unknown route: $route', textDirection: TextDirection.ltr),
+    );
   }
 }
 
@@ -60,6 +61,7 @@ class ListDemo extends StatelessWidget {
     'gesture',
     'increment',
     'event',
+    'network',
     'otherssss'
   ];
 
@@ -128,6 +130,8 @@ class ListDemo extends StatelessWidget {
             return Counter();
           case 'event':
             return TitleEvent();
+          case 'network':
+            return MyHomePage();
           default:
             return HelloWorld();
         }
