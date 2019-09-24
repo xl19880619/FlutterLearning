@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CounterDisplay extends StatelessWidget {
-
   CounterDisplay({this.count});
   final int count;
 
@@ -41,22 +40,24 @@ class _CounterState extends State<Counter> {
       _counter++;
 
       // 当个数累积到3的时候给客户端发参数
-      if(_counter == 3) {
+      if (_counter == 3) {
         _toNativeSomethingAndGetInfo();
       }
 
       // 当个数累积到5的时候给客户端发参数
-      if(_counter == 1002) {
-        Map<String, String> map = { "title": "这是一条来自flutter的参数" };
-        methodChannel.invokeMethod('toNativePush',map);
+      if (_counter == 1002) {
+        Map<String, String> map = {"title": "这是一条来自flutter的参数"};
+        methodChannel.invokeMethod('toNativePush', map);
       }
 
       // 当个数累积到8的时候给客户端发参数
-      if(_counter == 1005) {
-        Map<String, dynamic> map = { "content": "flutterPop回来","data":[1,2,3,4,5]};
-        methodChannel.invokeMethod('toNativePop',map);
+      if (_counter == 1005) {
+        Map<String, dynamic> map = {
+          "content": "flutterPop回来",
+          "data": [1, 2, 3, 4, 5]
+        };
+        methodChannel.invokeMethod('toNativePop', map);
       }
-
     });
   }
 
@@ -64,7 +65,8 @@ class _CounterState extends State<Counter> {
   Future<Null> _toNativeSomethingAndGetInfo() async {
     dynamic result;
     try {
-      result = await methodChannel.invokeMethod('toNativeSomething','大佬你点击了$_counter下');
+      result = await methodChannel.invokeMethod(
+          'toNativeSomething', '大佬你点击了$_counter下');
     } on PlatformException {
       result = 100000;
     }
@@ -73,19 +75,23 @@ class _CounterState extends State<Counter> {
       if (result is int) {
         _counter = result;
       }
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Material(
-      child: new Row(
-        children: <Widget>[
-          new CounterIncrementor(onPressed: _increment),
-          new CounterDisplay(count: _counter),
-        ],
-      ),
-    );
+   return new Scaffold(
+        appBar: new AppBar(
+          title: new Text('H W!'),
+        ),
+        body: new Center(
+          child: new Row(
+            children: <Widget>[
+              new CounterIncrementor(onPressed: _increment),
+              new CounterDisplay(count: _counter),
+            ],
+          ),
+        ),
+      );
   }
 }
