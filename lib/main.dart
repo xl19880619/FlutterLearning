@@ -62,8 +62,9 @@ class ListDemo extends StatelessWidget {
     'increment',
     'event',
     'network',
-    'otherssss'
-  ];
+    'others',
+    'hell1',
+      ];
 
 
   // 创建一个给native的channel (类似iOS的通知）
