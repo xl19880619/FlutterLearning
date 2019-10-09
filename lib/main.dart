@@ -11,9 +11,9 @@ import 'NetworkTests.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui';
 
-// void main() => runApp(new MyApp());
+void main() => runApp(new MyApp());
 
-void main() => runApp(_widgetForRoute(window.defaultRouteName));
+// void main() => runApp(_widgetForRoute(window.defaultRouteName));
 
 Widget _widgetForRoute(String route) {
   switch (route) {
@@ -62,8 +62,9 @@ class ListDemo extends StatelessWidget {
     'increment',
     'event',
     'network',
-    'otherssss'
-  ];
+    'others',
+    'hell1',
+      ];
 
 
   // 创建一个给native的channel (类似iOS的通知）
