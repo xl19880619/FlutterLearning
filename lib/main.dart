@@ -11,9 +11,9 @@ import 'NetworkTests.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui';
 
-// void main() => runApp(new MyApp());
+void main() => runApp(new MyApp());
 
-void main() => runApp(_widgetForRoute(window.defaultRouteName));
+// void main() => runApp(_widgetForRoute(window.defaultRouteName));
 
 Widget _widgetForRoute(String route) {
   switch (route) {
