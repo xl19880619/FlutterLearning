@@ -128,6 +128,10 @@ Skia 是一款用 C++ 开发的、性能彪悍的 2D 图像引擎，被广泛应
 	
 ## 五、上手开发
 
+### 环境搭建
+
+[FlutterBegin](./FlutterBegin.md)
+
 ### Widget is God
 
 Widget 是 Flutter 功能的抽象描述，是视图的配置信息，同样也是数据的映射，是 Flutter 开发框架中最基本的概念。前端框架中常见的名词，比如视图（View）、视图控制器（View Controller）、活动（Activity）、应用（Application）、布局（Layout）等，在 Flutter 中都是 Widget。 Flutter 的核心设计思想便是“一切皆 Widget”。 我们可以一起看看Flutter提供了哪些可以用的Widget： https://flutter.cn/docs/development/ui/widgets
@@ -276,8 +280,93 @@ class MyAppState extends State<MyApp> {
 
 ### 通信 Flutter <--> Flutter
 
-- setstate
+- init 传值
+
+```
+MyAppBar(
+  title: new Text('test')
+)
+
+class MyAppBar extends StatelessWidget {
+  MyAppBar({this.title});
+  final Widget title;
+  ...
+}
 
 ```
 
-```
+- 三方库 
+
+EventBus、Provider等等官方推荐方式
+
+[List of state management approaches](https://flutter.dev/docs/development/data-and-backend/state-mgmt/options)
+
+### 通信 Flutter <--> Native
+
+- MethodChannel
+
+- EventChannel
+
+### 混合方案
+
+[混合开发](./混合开发.md)
+
+## 六、Flutter现状、未来的讨论
+
+#### 美观（样式多样）、快速（渲染性能）、高效（热重载）、开放（开源） 集一体
+
+越来越受欢迎，热度超过TensorFlow、Node.js
+
+越来越多公司采用 Flutter，已有知名应用上线 Flutter 版本。
+
+![flutter_com](pic/flutter_com.png)
+
+大厂对 Fluter 投入的人力物力增多，对混编方案的研究与支持，推出各种解决方案。
+
+举例：咸鱼 - 研发无人化 - 从产品到技术的转化中，怎么减少不必要的产出，用技术做到极致。
+跨栈是最容易的方法，统一多端逻辑，减少至少一倍的工作量。Native + Weex + Flutter，Weex负责动态性较强的活动，导购和营销等；
+从flutter的alpha版本跟到现在，bugfix和基础设施建设，并跟google的flutter团队建立了亲密的关系，通过无数灰度测试和验证，最终业务上线。
+最终确定flutter这个体系可以用于商用，并能够为加速研发效率，为业务带来价值。flutter只是在技术侧推进研发无人化体系的一种技术解决方案的选型。
+闲鱼团队的 **FlutterBoost**，新一代Flutter-Native混合解决方案。 
+FlutterBoost是一个Flutter插件，它可以轻松地为现有原生应用程序提供Flutter混合集成方案。
+FlutterBoost的理念是将Flutter像Webview那样来使用。
+在现有应用程序中同时管理Native页面和Flutter页面并非易事。 
+FlutterBoost帮你处理页面的映射和跳转，你只需关心页面的名字和参数即可（通常可以是URL）。
+
+Flutter 中国开发者社区活跃度，贡献了大量的高质量技术文章，Flutter官方文档的翻译。
+
+Flutter for Web，桌面端，嵌入式等等，所有带屏幕的设备，最大化复用代码，Widget层高度一致。
+
+Web 开发的加入，快速实现 **降级策略**，h5形式的热更新。
+
+开发体验：UI as Code。对提高 Flutter UI 代码的可读性做了一系列的尝试，包括 Dart 语法的改进和对 IDE UI 的改进，这些统称为 UI as Code。
+
+对Flutter的呼声很高，加大投入。wiki公开， https://github.com/flutter/flutter/wiki/Roadmap
+
+	- Dart 语言也在积极地开发对 non-nullable types 的支持
+	- Extension methods 也在 Dart 语言的项目日程上
+	- Dart runtime 会增加对直接调用 C/C++ 代码的支持
+	- Flutter 的报错信息会更容易理解
+	- 其他的投入还包括持续优化 Flutter for Web，以及完善桌面 UI 的基本交互方式
+
+Native被取代的时机是否到来，第三方框架造成的Binary增加，加载和初始化耗时，性能下降等在Flutter上表现还不错。
+从长远来看，被Flutter取代的几率会越来越高，中小型团队开发中等规模应用是一个不错的选择。
+大型的应用，Native + Hybird 或者 Native + Web ，可以考虑局部使用，eg，咸鱼。
+
+### 泼冷水 
+
+- Flutter 技术侧没有创新，在Flutter之前有QT QML，同样使用GPU光栅化等等，只因Google是亲爹，让开发者有信心。
+
+- Flutter 官方从目前看对功能开发投入不大，issues堆积如山，接近10000个。类比swift 早起版本，ABI 不稳定问题，升级维护成本。
+
+- 第三方成熟度还需要一段时间，等待大部分SDK 大厂入局。
+
+## 学习资源
+
+- Flutter官网 : https://flutter.dev/
+- Flutter官网中文社区 : https://flutter.cn/
+- Dart学习官网 : http://dart.goodev.org/
+- Flutter中文网 : https://flutterchina.club/
+- Flutter Github : https://github.com/flutter/flutter
+- 闲鱼Flutter专题 : https://www.yuque.com/xytech/flutter/
+- GithubAppFlutter : https://github.com/CarGuo/GSYGithubAppFlutter
