@@ -275,3 +275,9 @@ class MyAppState extends State<MyApp> {
 但事实是，StatefulWidget 的滥用会直接影响 Flutter 应用的渲染性能。Widget 是不可变的，更新则意味着销毁 + 重建（build）。StatelessWidget 是静态的，一旦创建则无需更新；而对于 StatefulWidget 来说，在 State 类中调用 setState 方法更新数据，会触发视图的销毁和重建，也将间接地触发其每个子 Widget 的销毁和重建。避免无谓的 StatefulWidget 使用，是提高 Flutter 应用渲染性能最简单也是最直接的手段。
 
 ### 通信 Flutter <--> Flutter
+
+- setstate
+
+```
+
+```
