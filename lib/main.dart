@@ -9,13 +9,16 @@ import 'IncreaseTests.dart';
 import 'EventTests.dart';
 import 'NetworkTests.dart';
 import 'package:flutter/services.dart';
-import 'dart:ui';
+// import 'dart:ui';
+import 'dart:ui' as ui;
 
 void main() => runApp(new MyApp());
 
-// void main() => runApp(_widgetForRoute(window.defaultRouteName));
+// void main() => runApp(WidgetForRoute(ui.window.defaultRouteName));
 
-Widget _widgetForRoute(String route) {
+Widget WidgetForRoute(String route) {
+  LogUtil.init(isDebug: true);
+  LogUtil.v(route);
   switch (route) {
     case 'myApp':
       return MyApp();
