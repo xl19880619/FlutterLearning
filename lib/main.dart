@@ -16,21 +16,21 @@ void main() => runApp(new MyApp());
 
 // void main() => runApp(WidgetForRoute(ui.window.defaultRouteName));
 
-Widget WidgetForRoute(String route) {
-  LogUtil.init(isDebug: true);
-  LogUtil.v(route);
-  switch (route) {
-    case 'myApp':
-      return MyApp();
-    case 'home':
-      return RandomWords();
-    default:
-      // return MyApp();
-    return Center(
-      child: Text('Unknown route: $route', textDirection: TextDirection.ltr),
-    );
-  }
-}
+// Widget WidgetForRoute(String route) {
+//   LogUtil.init(isDebug: true);
+//   LogUtil.v(route);
+//   switch (route) {
+//     case 'myApp':
+//       return MyApp();
+//     case 'home':
+//       return RandomWords();
+//     default:
+//       // return MyApp();
+//     return Center(
+//       child: Text('Unknown route: $route', textDirection: TextDirection.ltr),
+//     );
+//   }
+// }
 
 class MyApp extends StatelessWidget {
   @override
